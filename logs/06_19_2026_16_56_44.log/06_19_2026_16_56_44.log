@@ -1,5 +1,0 @@
-[2026-06-19 16:56:44,543 ] INFO - 164 - NumExpr defaulting to 8 threads.
-[2026-06-19 16:56:45,585 ] INFO - 14 - Initiate the Data Ingestion
-[2026-06-19 16:56:49,310 ] INFO - 62 - Performed Train test Split on Dataframe
-[2026-06-19 16:56:49,311 ] INFO - 64 - Exited split_data_as_train_test method of Data_ingestion Class
-[2026-06-19 16:56:49,311 ] INFO - 68 - Exporting Train and test Split

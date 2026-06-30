@@ -1,4 +1,8 @@
 venv
 .env
 mlflow.db
-__pycache__
+__pycache__/
+Artifacts/
+logs/
+*.pyc
+*.pyo

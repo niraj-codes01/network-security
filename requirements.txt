@@ -7,6 +7,10 @@ scikit-learn
 scipy
 dill
 pyaml
+dagshub
 mlflow
+fastapi
+uvicorn
+
 
 ##-e .

@@ -6,38 +6,210 @@
 <title>Network Security Prediction</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 
+:root{
+    --bg-0:#0a0e14;
+    --bg-1:#111722;
+    --bg-2:#161e2c;
+    --line:#243044;
+    --cyan:#3ddcff;
+    --green:#34e0a1;
+    --text:#d9e3ef;
+    --muted:#7387a3;
+}
+
+*{
+    box-sizing:border-box;
+}
+
 body{
-    background:linear-gradient(135deg,#4facfe,#00c6fb);
-    height:100vh;
+    background:
+        radial-gradient(circle at 20% 0%, rgba(61,220,255,.08), transparent 45%),
+        radial-gradient(circle at 80% 100%, rgba(52,224,161,.06), transparent 45%),
+        var(--bg-0);
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-family:Arial;
+    font-family:'Inter',Arial,sans-serif;
+    color:var(--text);
+    padding:24px;
+}
+
+.scan-shell{
+    width:560px;
+    max-width:100%;
+    position:relative;
+}
+
+.scan-shell::before{
+    content:"";
+    position:absolute;
+    inset:-1px;
+    border-radius:18px;
+    padding:1px;
+    background:linear-gradient(135deg,var(--cyan),transparent 40%,transparent 60%,var(--green));
+    -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    opacity:.6;
 }
 
 .card{
+    background:linear-gradient(180deg,var(--bg-1),var(--bg-2));
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:42px 38px;
+    box-shadow:0 25px 60px rgba(0,0,0,.55);
+}
 
-    width:550px;
-    border:none;
-    border-radius:20px;
-    padding:40px;
-    box-shadow:0 15px 40px rgba(0,0,0,.25);
+.eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.72rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--green);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:6px;
+}
+
+.eyebrow .dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 8px var(--green);
+    animation:pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse{
+    0%,100%{opacity:1;}
+    50%{opacity:.3;}
 }
 
 h1{
-
-    text-align:center;
-    margin-bottom:25px;
-    color:#0d6efd;
-    font-weight:bold;
+    font-family:'JetBrains Mono',monospace;
+    font-size:1.55rem;
+    font-weight:700;
+    color:#fff;
+    margin-bottom:6px;
+    letter-spacing:-.01em;
 }
 
-.btn{
+.subtitle{
+    color:var(--muted);
+    font-size:.92rem;
+    margin-bottom:30px;
+    line-height:1.5;
+}
 
+.radar{
+    width:64px;
+    height:64px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+    margin:0 auto 24px;
+    background:radial-gradient(circle,rgba(61,220,255,.08),transparent 70%);
+}
+
+.radar::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:conic-gradient(from 0deg,rgba(61,220,255,.85),transparent 35%);
+    animation:sweep 2.6s linear infinite;
+}
+
+.radar::after{
+    content:"";
+    position:absolute;
+    inset:8px;
+    border-radius:50%;
+    border:1px solid var(--line);
+}
+
+@keyframes sweep{
+    to{transform:rotate(360deg);}
+}
+
+.drop-zone{
+    border:1px dashed var(--line);
+    border-radius:12px;
+    background:rgba(255,255,255,.015);
+    padding:22px 18px;
+    margin-bottom:22px;
+    transition:border-color .2s ease, background .2s ease;
+}
+
+.drop-zone:focus-within,.drop-zone:hover{
+    border-color:var(--cyan);
+    background:rgba(61,220,255,.04);
+}
+
+.drop-zone label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.78rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:10px;
+    display:block;
+}
+
+.form-control{
+    background:var(--bg-0);
+    border:1px solid var(--line);
+    color:var(--text);
+    font-size:.92rem;
+}
+
+.form-control:focus{
+    background:var(--bg-0);
+    color:var(--text);
+    border-color:var(--cyan);
+    box-shadow:0 0 0 .2rem rgba(61,220,255,.15);
+}
+
+.form-control::file-selector-button{
+    background:var(--bg-2);
+    color:var(--text);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:6px 12px;
+    margin-right:12px;
+}
+
+.hint{
+    font-size:.78rem;
+    color:var(--muted);
+    margin-top:10px;
+}
+
+.btn-scan{
     width:100%;
+    background:linear-gradient(135deg,var(--cyan),var(--green));
+    border:none;
+    color:#06121a;
+    font-weight:600;
+    font-family:'JetBrains Mono',monospace;
+    letter-spacing:.04em;
+    padding:13px;
+    border-radius:10px;
+    transition:transform .15s ease, box-shadow .15s ease;
+}
+
+.btn-scan:hover{
+    transform:translateY(-1px);
+    box-shadow:0 10px 25px rgba(61,220,255,.25);
+    color:#06121a;
 }
 
 </style>
@@ -46,34 +218,34 @@ h1{
 
 <body>
 
+<div class="scan-shell">
 <div class="card">
 
-<h1>🛡 Network Security Prediction</h1>
+<div class="radar"></div>
+
+<div class="eyebrow"><span class="dot"></span>System Idle &mdash; Awaiting Input</div>
+<h1>Network Security Prediction</h1>
+<p class="subtitle">Upload captured traffic data and the model will flag anomalies, classify threat types, and score each record for risk.</p>
 
 <form action="/predict" method="post" enctype="multipart/form-data">
 
-<div class="mb-4">
-
-<label class="form-label">
-Upload CSV File
-</label>
-
+<div class="drop-zone">
+<label for="file">Traffic capture (CSV)</label>
 <input
 class="form-control"
 type="file"
+id="file"
 name="file"
+accept=".csv"
 required>
-
+<div class="hint">Accepted format: .csv &mdash; one row per network flow or packet record.</div>
 </div>
 
-<button class="btn btn-primary btn-lg">
-
-Predict
-
-</button>
+<button class="btn btn-scan btn-lg" type="submit">Run Prediction</button>
 
 </form>
 
+</div>
 </div>
 
 </body>
